@@ -14,10 +14,6 @@ class Auth extends React.Component {
         }
     }
 
-    landing = () => {
-        return this.isRegister ? 'Signup' : 'Login'
-    }
-
     setLastName(event) {
         this.setState({ lastName: event.target.value })
     }
@@ -39,13 +35,14 @@ class Auth extends React.Component {
         console.log(this.state.password)
     }
 
-    setIsRegister = () => {
-        this.setState({ isRegister: true })
+    setIsRegister() {
+        this.state.isRegister ? this.setState({ isRegister: false}) : this.setState({ isRegister: true })
     }
 
-    signupFields = () => this.state.isRegister ?
-    (
-        <>
+    signupFields() {
+        if (this.state.isRegister) {
+        return (
+        <div>
             <label htmlFor='firstName'>First Name:</label>
             <br/>
             <input type='text' 
@@ -67,26 +64,28 @@ class Auth extends React.Component {
             value={this.state.email} 
             onChange={(event) => this.setEmail(event)} />
             <br/>
-        </>
-    ): null
+        </div>)
+        } else { return null }
+    }
+    
 
-    handleSubmit = event => {
+    handleSubmit(event) {
         event.preventDefault()
 
-        let reqBody = !this.state.isRegister ? {
-            userName: this.state.userName,
-            password: this.state.password
-        } : {
+        let reqBody = this.state.isRegister ? {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             email: this.state.email,
             password: this.state.password,
             userName: this.state.userName
+        } : {
+            userName: this.state.userName,
+            password: this.state.password
         }
 
-        let url = !this.state.isRegister ? 
-            "http://localhost:3050/user/login" :
-            "http://localhost:3050/user/register"
+        let url = this.state.isRegister ? 
+            "http://localhost:3050/user/register" :
+            "http://localhost:3050/user/login"
         console.log(reqBody)
         console.log(url)
         fetch(url, {
@@ -97,7 +96,7 @@ class Auth extends React.Component {
             })
         })
         .then(res => res.json())
-        .then(data => this.props.updateLocalStorage(data.token))
+        .then(data => this.props.updateLocalStorage(data.token)) 
         .catch(err => console.log(err))
     }
 
@@ -124,8 +123,8 @@ class Auth extends React.Component {
                     onChange={(event) => this.setPassword(event)} />
                     <br/>
                 </form>
-                <button onClick={this.setIsRegister}>Register</button>
-                <button onClick={this.handleSubmit} >Submit</button>
+                <button onClick={() => this.setIsRegister}>Register</button>
+                <button onClick={(event) => this.handleSubmit(event)} >Submit</button>
             </div>
         )
     }

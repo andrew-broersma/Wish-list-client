@@ -3,12 +3,13 @@ import './App.css';
 
 import Auth from './Components/Auth/Auth';
 import Landing from './Components/Landing/Landing';
+import { BrowserRouter as Router } from "react-router-dom"
 
 class App extends React.Component {
   constructor(){
     super();
     this.state = {
-      sessionToken: undefined,
+      sessionToken: null,
       isLogin: true
     }
   }
@@ -17,28 +18,28 @@ class App extends React.Component {
     this.setState({ sessionToken: token })
   }
 
-  tokenOnLoad() {
-    if (localStorage.getItem("token")) {
-      this.setSessionToken(localStorage.getItem("token"))
-    }
-  } 
-
-  updateLocalStorage = newToken => {
-    localStorage.setItem("token", newToken)
-    this.setSessionToken(newToken)
+  updateLocalStorage = (newToken) => {
+    localStorage.setItem("token", newToken);
+    this.setState({ sessionToken: newToken })
   }
 
   clearLocalStorage = () => {
     localStorage.clear()
-    this.setSessionToken(undefined)
+    this.setState({sessionToken: null})
   }
 
   loginChecker() {
-    return this.state.sessionToken !== undefined ?
-    <Landing sessionToken={this.state.sessionToken} /> :
+    return (localStorage.getItem("token") !== null ? 
+    <Router><Landing sessionToken={this.state.sessionToken} clearLocalStorage={this.clearLocalStorage}/></Router> : 
     <Auth updateLocalStorage={this.updateLocalStorage} />
+    )
   }
 
+  componentDidMount() {
+    if (localStorage.getItem("token") !== null) {
+      this.setState({sessionToken: localStorage.getItem("token")})
+    }
+  }
 // PUT A NAV BAR COMPONENT IN THE RENDER
 
   render() {
