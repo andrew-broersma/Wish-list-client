@@ -61,9 +61,9 @@ class Landing extends React.Component {
             <div id="cardWrapper">
                 <Sidebar clearLocalStorage={this.props.clearLocalStorage}/>
                 <Switch>
-                    <Route exact path="/"><MappingFun genericFetch={this.state.genericFetch} sessionToken={this.props.sessionToken}/></Route>
+                    <Route exact path="/mappedGames"><MappingFun genericFetch={this.state.genericFetch} sessionToken={this.props.sessionToken}/></Route>
                     <Route exact path="/myList"><MyList sessionToken={this.props.sessionToken}/></Route>
-                </Switch>
+                </Switch> 
             </div>
         )
     }

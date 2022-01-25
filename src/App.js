@@ -3,7 +3,8 @@ import './App.css';
 
 import Auth from './Components/Auth/Auth';
 import Landing from './Components/Landing/Landing';
-import { BrowserRouter as Router } from "react-router-dom"
+import MyList from './Components/MyList/MyList';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 class App extends React.Component {
   constructor(){
@@ -45,7 +46,13 @@ class App extends React.Component {
   render() {
     return (
     <div className="App">
-      {this.loginChecker()}
+      {/* {this.loginChecker()} */}
+      <Router>
+        <Switch>
+          <Route><Auth exact path="/" updateLocalStorage={this.updateLocalStorage} /></Route> :
+          <Route><Landing path="/browseGames" sessionToken={this.state.sessionToken} clearLocalStorage={this.clearLocalStorage}/></Route>
+        </Switch>
+      </Router>
     </div>
   )};
 }

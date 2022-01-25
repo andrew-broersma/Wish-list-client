@@ -1,5 +1,7 @@
 import React from "react";
 import './auth.css';
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+
 
 class Auth extends React.Component {
     constructor(props) {
@@ -35,7 +37,7 @@ class Auth extends React.Component {
         console.log(this.state.password)
     }
 
-    setIsRegister() {
+    setIsRegister = () => {
         this.state.isRegister ? this.setState({ isRegister: false}) : this.setState({ isRegister: true })
     }
 
@@ -96,7 +98,7 @@ class Auth extends React.Component {
             })
         })
         .then(res => res.json())
-        .then(data => this.props.updateLocalStorage(data.token)) 
+        .then(data => this.props.updateLocalStorage(data.token))
         .catch(err => console.log(err))
     }
 
@@ -123,8 +125,8 @@ class Auth extends React.Component {
                     onChange={(event) => this.setPassword(event)} />
                     <br/>
                 </form>
-                <button onClick={() => this.setIsRegister}>Register</button>
-                <button onClick={(event) => this.handleSubmit(event)} >Submit</button>
+                <button onClick={() => this.setIsRegister()}>Register</button>
+                <Link to="/browseGames" ><button onClick={(event) => this.handleSubmit(event)} >Submit</button></Link>
             </div>
         )
     }

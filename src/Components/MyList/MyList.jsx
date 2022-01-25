@@ -88,14 +88,14 @@ class MyList extends React.Component {
             });
     }
 
-    componentDidMount() {
-        this.getFromDB()
-    }
+    // componentDidMount() {
+    //     this.getFromDB()
+    // }
 
     render() {
         return(
             <div>
-                {/* {this.getFromDB()} */}
+                {this.getFromDB()}
                 {/* {(this.state.listFetch.length > 0) ? <ListRender listFetch={this.props.listFetch} sessionToken={this.props.sessionToken} /> : null } */}
             </div>
         )

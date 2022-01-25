@@ -42,7 +42,7 @@ class Sidebar extends React.Component {
             <div>
                 <ul>           
                     <li id="myList" ><Link to="/myList">My List</Link></li>
-                    <li id="browse"><Link to="/">Back to Browse</Link></li>
+                    <li id="browse"><Link to="/mappedGames">Back to Browse</Link></li>
                     {/* <li id="myList" ><Link to="/">My List</Link></li>
                     <li><Link to="/mappingFun">Back to Browse</Link></li> */}
                     <Form>
