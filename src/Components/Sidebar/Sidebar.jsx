@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Link, Switch } from 'react-router-dom'
+// import { Route, Link, Switch } from 'react-router-dom'
 import "./Sidebar.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Accordion, AccordionItem, AccordionHeader, Form, FormGroup, Label, Input } from 'reactstrap';
@@ -41,8 +41,8 @@ class Sidebar extends React.Component {
         return(
             <div>
                 <ul>           
-                    <li id="myList" ><Link to="/myList">My List</Link></li>
-                    <li id="browse"><Link to="/mappedGames">Back to Browse</Link></li>
+                    <li id="myList" ><a href="../MyList/MyList">My List</a></li>
+                    <li id="browse">Back to Browse</li>
                     {/* <li id="myList" ><Link to="/">My List</Link></li>
                     <li><Link to="/mappingFun">Back to Browse</Link></li> */}
                     <Form>

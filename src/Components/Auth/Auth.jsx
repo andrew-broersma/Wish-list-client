@@ -1,6 +1,5 @@
 import React from "react";
 import './auth.css';
-import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 
 
 class Auth extends React.Component {
@@ -126,7 +125,7 @@ class Auth extends React.Component {
                     <br/>
                 </form>
                 <button onClick={() => this.setIsRegister()}>Register</button>
-                <Link to="/browseGames" ><button onClick={(event) => this.handleSubmit(event)} >Submit</button></Link>
+                <button onClick={(event) => this.handleSubmit(event)} >Submit</button>
             </div>
         )
     }

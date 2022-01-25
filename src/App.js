@@ -4,7 +4,7 @@ import './App.css';
 import Auth from './Components/Auth/Auth';
 import Landing from './Components/Landing/Landing';
 import MyList from './Components/MyList/MyList';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 class App extends React.Component {
   constructor(){
@@ -31,7 +31,7 @@ class App extends React.Component {
 
   loginChecker() {
     return (localStorage.getItem("token") !== null ? 
-    <Router><Landing sessionToken={this.state.sessionToken} clearLocalStorage={this.clearLocalStorage}/></Router> : 
+    <Landing sessionToken={this.state.sessionToken} clearLocalStorage={this.clearLocalStorage}/> :
     <Auth updateLocalStorage={this.updateLocalStorage} />
     )
   }
@@ -46,13 +46,13 @@ class App extends React.Component {
   render() {
     return (
     <div className="App">
-      {/* {this.loginChecker()} */}
-      <Router>
+      {this.loginChecker()}
+      {/* <Router>
         <Switch>
           <Route><Auth exact path="/" updateLocalStorage={this.updateLocalStorage} /></Route> :
           <Route><Landing path="/browseGames" sessionToken={this.state.sessionToken} clearLocalStorage={this.clearLocalStorage}/></Route>
         </Switch>
-      </Router>
+      </Router> */}
     </div>
   )};
 }
