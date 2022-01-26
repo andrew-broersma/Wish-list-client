@@ -34,7 +34,6 @@ class Landing extends React.Component {
     }
 
     getInfo() {
-        console.log(this.makeUrl())
         fetch(this.makeUrl(), {
             method: "GET",
             // headers: { "access-control-allow-origin": "*" },
@@ -55,7 +54,6 @@ class Landing extends React.Component {
     }
 
     render() {
-        console.log(this.state.genericFetch)
 
         return(
             <div id="cardWrapper">

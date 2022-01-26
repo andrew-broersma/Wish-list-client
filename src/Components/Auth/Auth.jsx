@@ -35,7 +35,6 @@ class Auth extends React.Component {
 
     setPassword(event) {
         this.setState({ password: event.target.value })
-        console.log(this.state.password)
     }
 
     setIsRegister = () => {
@@ -89,8 +88,6 @@ class Auth extends React.Component {
         let url = this.state.isRegister ? 
             "http://localhost:3050/user/register" :
             "http://localhost:3050/user/login"
-        console.log(reqBody)
-        console.log(url)
         fetch(url, {
             method: "POST",
             body: JSON.stringify(reqBody),
