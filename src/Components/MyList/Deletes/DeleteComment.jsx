@@ -2,6 +2,7 @@ import React from 'react';
 import './DeleteList.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'reactstrap'
+import APIURL from '../../../helpers/environment';
 
 class DeleteComment extends React.Component {
     constructor(props) {
@@ -23,13 +24,11 @@ class DeleteComment extends React.Component {
 
     deleteComment(e) {
         const id = e.target.id
-        console.log("this is remove value key", this.props.removeValueKey)
-        // const id = this.parseJwt(localStorage.token).id
         let reqBody = {
             listId: id
         }
 
-        fetch(`http://localhost:3050/userComment/deleteComment`, {
+        fetch(`${APIURL}/userComment/deleteComment`, {
             method: "DELETE",
             body: JSON.stringify(reqBody),
             headers: new Headers({
@@ -38,8 +37,6 @@ class DeleteComment extends React.Component {
             })
         })
         .then((res) => res.json())
-        .then((data) => console.log(data))
-        .then(console.log(reqBody))
     }
 
 

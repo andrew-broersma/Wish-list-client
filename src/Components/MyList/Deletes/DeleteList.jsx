@@ -3,6 +3,7 @@ import './DeleteList.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'reactstrap'
 import { Link } from 'react-router-dom'
+import APIURL from '../../../helpers/environment';
 
 class DeleteList extends React.Component {
     constructor(props) {
@@ -17,10 +18,8 @@ class DeleteList extends React.Component {
             id: e.target.id
         }
 
-        console.log(e.target.id)
 
-
-        fetch(`http://localhost:3050/list/deleteGame`, {
+        fetch(`${APIURL}/list/deleteGame`, {
             method: "DELETE",
             body: JSON.stringify(reqBody),
             headers: new Headers({
@@ -29,8 +28,6 @@ class DeleteList extends React.Component {
             })
         })
         .then((res) => res.json())
-        .then((data) => console.log(data))
-        .then(console.log(reqBody))
     }
 
     // deleteListMethod() {

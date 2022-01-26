@@ -16,9 +16,7 @@ class ListRender extends React.Component {
     }
 
     setRemoveValueKey = (key) => {
-        console.log("before", this.state.removeValueKey)
         this.setState({removeValueKey: key})
-        console.log("after", this.state.removeValueKey)
     }
 
     setModalAndValueKey = (key, bool) => {
@@ -31,19 +29,13 @@ class ListRender extends React.Component {
 
     listGames(data) {
 
-        // console.log(data);
-
         let myCards = Object.values(data)
-
-        // console.log(myCards)
 
         return(
 
         Object.entries(myCards).map((index, key) =>
         <Card key={key} className="card" style={{width: "20%"}} >
-            {/* {console.log(myCards[key].id)} */}
-            {console.log(index[1].id)}
-            {/* {console.log(key)} */}
+            {/* {console.log(index[1].id)} */}
                 <CardImg src={index[1].background} alt="background splash for game" width="15%" top />
                 <CardBody>
                     <CardTitle className="cardTitle" ><strong>{index[1].gameName}</strong></CardTitle>
@@ -56,7 +48,6 @@ class ListRender extends React.Component {
                     <CardSubtitle><strong>{index[1].releaseDate.slice(0, 10)}</strong></CardSubtitle>
                     <br />
                     <CardSubtitle className="headingsSorta">My Rating: <strong>{index[1].rating}/5</strong> <Button className="button" value={key} onClick={(event)=>this.setState({newModalOpen: true, removeValueKey: event.target.value})}>Update My Rating</Button></CardSubtitle>
-                    {/* <CardSubtitle className="headingsSorta">My Rating: <strong>{index[1].rating}/5</strong><Button className="button" onClick={()=>this.setRemoveValueKey(myCards[key].id, true)}>Update My Rating</Button></CardSubtitle> */}
                     <br />
                     <CardSubtitle className="headingsSorta">Why I'm Interested: </CardSubtitle>
                     <CardSubtitle><strong>{(index[1].comments.length > 0) ? index[1].comments[0].comment : null}</strong></CardSubtitle>
@@ -65,7 +56,6 @@ class ListRender extends React.Component {
                     <a href={"https://rawg.io/" + index[1].slug} className="rawgLink">RAWG page</a>
                     <p></p>
                     <Button className="button" value={key} onClick={(event) => this.setRemoveValueKey(event.target.value )} ><DeleteList id={index[1].id} setListFetch={this.props.setListFetch} getFromDB={this.props.getFromDB} sessionToken={this.props.sessionToken} listFetch={this.props.listFetch} removeValueKey={this.state.removeValueKey} setRemoveValueKey={this.setRemoveValueKey} /></Button>
-                    {/* <Button className="button" onClick={() => this.setRemoveValueKey(myCards[key].id)} ><DeleteList setListFetch={this.props.setListFetch} getFromDB={this.props.getFromDB} sessionToken={this.props.sessionToken} listFetch={this.props.listFetch} removeValueKey={this.state.removeValueKey} setRemoveValueKey={this.setRemoveValueKey} /></Button> */}
                 </CardBody>
         </Card>
         ));

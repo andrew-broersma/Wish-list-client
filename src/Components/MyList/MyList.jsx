@@ -1,6 +1,7 @@
 import React from "react";
 import './MyList.css'
 import ListRender from "./ListRender";
+import APIURL from "../../helpers/environment";
 // import { CardImg, Card, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap';
 
 
@@ -34,8 +35,7 @@ class MyList extends React.Component {
     }
 
     getFromDB() {
-        console.log(process.env.APIURL + "/myList")
-        fetch(`http://localhost:3050/list/myList`, {
+        fetch(`${APIURL}/list/myList`, {
             method: "GET",
             headers: new Headers ({ 
                 "Content-Type": "application/json",

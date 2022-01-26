@@ -3,6 +3,7 @@ import './UpdateList.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, ModalBody, ModalHeader, Form, FormGroup, Input } from 'reactstrap'
 import { Link } from 'react-router-dom'
+import APIURL from '../../../helpers/environment';
 
 class UpdateList extends React.Component {
     constructor(props) {
@@ -14,16 +15,13 @@ class UpdateList extends React.Component {
     }
 
     updateListItem(props) {
-        console.log(this.state)
 
         let reqBody = {
             rating: this.state.rating,
             id: this.props.listFetch[this.props.removeValueKey].id
         }
 
-        console.log(reqBody)
-
-        fetch(`http://localhost:3050/list/updateRating`, {
+        fetch(`${APIURL}/list/updateRating`, {
             method: "PUT",
             body: JSON.stringify(reqBody),
             headers: new Headers ({
@@ -32,22 +30,15 @@ class UpdateList extends React.Component {
             })
         })
         .then((res) => res.json())
-        .then((data) => console.log(data))
-        // .then(console.log(reqBody))
     }
 
     updateCommentItem(props) {
-        // console.log(this.state)
-        // console.log(this.props.removeValueKey)
-        // console.log(this.props.listFetch[this.props.removeValueKey])
         let reqBody = {
             comment: this.state.comment,
             id: this.props.listFetch[this.props.removeValueKey].id,
         }
 
-        console.log(reqBody)
-
-        fetch(`http://localhost:3050/userComment/updateComment`, {
+        fetch(`${APIURL}/userComment/updateComment`, {
             method: "PUT",
             body: JSON.stringify(reqBody),
             headers: new Headers ({
@@ -56,8 +47,6 @@ class UpdateList extends React.Component {
             })
         })
         .then((res) => res.json())
-        .then((data) => console.log(data))
-        // .then(console.log(reqBody))
     }
 
     superUpdateMethod() {
@@ -69,8 +58,6 @@ class UpdateList extends React.Component {
         if (this.state.comment !== this.props.listFetch[this.props.removeValueKey].comments.comment) {
         this.updateListItem()
         }
-
-        console.log(this.props.listFetch[this.props.removeValueKey].id)
 
         this.props.modalToggle()
     }
