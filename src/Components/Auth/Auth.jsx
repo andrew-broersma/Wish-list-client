@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import './auth.css';
 import Landing from "../Landing/Landing";
+import APIURL from "../../helpers/environment";
 
 
 class Auth extends React.Component {
@@ -86,8 +87,8 @@ class Auth extends React.Component {
         }
 
         let url = this.state.isRegister ? 
-            "http://localhost:3050/user/register" :
-            "http://localhost:3050/user/login"
+            `${APIURL}/user/register` :
+            `${APIURL}/user/login`
         fetch(url, {
             method: "POST",
             body: JSON.stringify(reqBody),
