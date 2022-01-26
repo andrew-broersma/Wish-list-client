@@ -39,7 +39,7 @@ class MyList extends React.Component {
             method: "GET",
             headers: new Headers ({ 
                 "Content-Type": "application/json",
-                "Authorization": this.props.sessionToken
+                "Authorization": localStorage.getItem('token')
             }),
         })
             .then((res) => res.json())
