@@ -42,7 +42,7 @@ class App extends React.Component {
   render() {
     return (
     <div className="App">
-      {this.state.sessionToken ? <Sidebar clearLocalStorage={this.clearLocalStorage}/> : null}
+      <Sidebar clearLocalStorage={this.clearLocalStorage}/>
       <Switch>
           <Route exact path="/"><Auth updateLocalStorage={this.updateLocalStorage} /></Route>
           <Route exact path="/browseGames"><Landing sessionToken={this.state.sessionToken} clearLocalStorage={this.clearLocalStorage}/></Route>
