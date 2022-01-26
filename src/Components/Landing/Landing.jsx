@@ -1,5 +1,6 @@
 import React from 'react';
 import './landing.css';
+import { Switch, Route } from 'react-router-dom'
 import MappingFun from './MappingFun';
 import Sidebar from '../Sidebar/Sidebar';
 import MyList from '../MyList/MyList';
@@ -58,8 +59,9 @@ class Landing extends React.Component {
 
         return(
             <div id="cardWrapper">
-                <Sidebar clearLocalStorage={this.props.clearLocalStorage}/>
-                <MappingFun genericFetch={this.state.genericFetch} sessionToken={this.props.sessionToken}/>
+                {/* <Sidebar clearLocalStorage={this.props.clearLocalStorage}/> */}
+                    <MappingFun genericFetch={this.state.genericFetch} sessionToken={this.props.sessionToken}/>
+                    
             </div>
         )
     }

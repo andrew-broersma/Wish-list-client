@@ -2,6 +2,7 @@ import React from 'react';
 import './UpdateList.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, ModalBody, ModalHeader, Form, FormGroup, Input } from 'reactstrap'
+import { Link } from 'react-router-dom'
 
 class UpdateList extends React.Component {
     constructor(props) {
@@ -17,8 +18,10 @@ class UpdateList extends React.Component {
 
         let reqBody = {
             rating: this.state.rating,
-            gameId: this.props.listFetch.gameId
+            id: this.props.listFetch[this.props.removeValueKey].id
         }
+
+        console.log(reqBody)
 
         fetch(`http://localhost:3050/list/updateRating`, {
             method: "PUT",
@@ -30,14 +33,19 @@ class UpdateList extends React.Component {
         })
         .then((res) => res.json())
         .then((data) => console.log(data))
-        .then(console.log(reqBody))
+        // .then(console.log(reqBody))
     }
 
     updateCommentItem(props) {
+        // console.log(this.state)
+        // console.log(this.props.removeValueKey)
+        // console.log(this.props.listFetch[this.props.removeValueKey])
         let reqBody = {
             comment: this.state.comment,
-            gameId: this.props.listFetch.gameId,
+            id: this.props.listFetch[this.props.removeValueKey].id,
         }
+
+        console.log(reqBody)
 
         fetch(`http://localhost:3050/userComment/updateComment`, {
             method: "PUT",
@@ -49,16 +57,26 @@ class UpdateList extends React.Component {
         })
         .then((res) => res.json())
         .then((data) => console.log(data))
-        .then(console.log(reqBody))
+        // .then(console.log(reqBody))
     }
 
     superUpdateMethod() {
-        if (this.state.rating !== this.props.listFetch[this.props.cardValueKey].rating) {
+        // this.props.setRemoveValueKey()
+        if (this.state.rating !== this.props.listFetch[this.props.removeValueKey].rating) {
         this.updateCommentItem()
         }
 
-        if (this.state.comment !== this.props.listFetch[this.props.cardValueKey].comments)
+        if (this.state.comment !== this.props.listFetch[this.props.removeValueKey].comments.comment) {
         this.updateListItem()
+        }
+
+        console.log(this.props.listFetch[this.props.removeValueKey].id)
+
+        this.props.modalToggle()
+    }
+
+    componentWillUnmount() {
+        this.props.getFromDB()
     }
 
     render() {
@@ -85,11 +103,13 @@ class UpdateList extends React.Component {
                             <FormGroup>
                                 <legend>Why were you interested?</legend>
                             <Input type="text" className="commentBox" onChange={(event) => this.setState({comment: event.target.value}) }/>
-                            <Input
-                            type="submit"
-                            color="primary"
-                            name="submit"
-                            onClick={(event) => this.superUpdateMethod(event)} />
+                            <Link to="/myList">
+                                <Input
+                                type="submit"
+                                color="primary"
+                                name="submit"
+                                onClick={(event) => this.superUpdateMethod(event)} />
+                            </Link>
                             </FormGroup>
                         </Form>
                     </ModalBody>

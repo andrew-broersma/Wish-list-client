@@ -21,10 +21,11 @@ class DeleteComment extends React.Component {
         return(userId)
     }}
 
-    deleteComment() {
-        const id = this.parseJwt(localStorage.token).id
+    deleteComment(e) {
+        const id = e.target.id
+        console.log("this is remove value key", this.props.removeValueKey)
+        // const id = this.parseJwt(localStorage.token).id
         let reqBody = {
-            gameId: this.props.listFetch[this.props.removeValueKey].gameId,
             listId: id
         }
 
@@ -40,10 +41,12 @@ class DeleteComment extends React.Component {
         .then((data) => console.log(data))
         .then(console.log(reqBody))
     }
+
+
     render() {
         return(
             <>
-            <Button onClick={() => this.deleteComment()}>X</Button>
+            <Button id={this.props.id} onClick={(e) => this.deleteComment(e)} style={{padding: '.75em', fontSize: ".75em", backgroundColor: 'orangered'}} >Delete Comment</Button>
             </>
         )
     }
