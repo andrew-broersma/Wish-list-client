@@ -15,33 +15,57 @@ class ListRender extends React.Component {
         }
     }
 
+    setRemoveValueKey = (key) => {
+        console.log("before", this.state.removeValueKey)
+        this.setState({removeValueKey: key})
+        console.log("after", this.state.removeValueKey)
+    }
+
+    setModalAndValueKey = (key, bool) => {
+        this.setState({removeValueKey: key, newModalOpen: bool})
+    }
+
     modalToggle = (event) => {
-        event.preventDefault()
         this.state.newModalOpen ? this.setState({newModalOpen: false}) : this.setState({newModalOpen: true})
     }
 
     listGames(data) {
 
-        console.log(data);
+        // console.log(data);
+
+        let myCards = Object.values(data)
+
+        // console.log(myCards)
 
         return(
 
-        data.map((index, key) => 
-        <Card id={key} style={{width: "20%"}} >
-                <CardImg src={index.background_image} alt="background splash for game" width="15%" top />
+        Object.entries(myCards).map((index, key) =>
+        <Card key={key} className="card" style={{width: "20%"}} >
+            {/* {console.log(myCards[key].id)} */}
+            {console.log(index[1].id)}
+            {/* {console.log(key)} */}
+                <CardImg src={index[1].background} alt="background splash for game" width="15%" top />
                 <CardBody>
-                    <CardTitle><strong>{index.name}</strong></CardTitle>
+                    <CardTitle className="cardTitle" ><strong>{index[1].gameName}</strong></CardTitle>
                     <p></p>
                     <br />
-                    {(index.genres.length > 0) ? index.genres.map((genre, key) => <span className='genre'>{genre.name} </span>) : <CardSubtitle>No Genre Listed</CardSubtitle>}
-                    <CardSubtitle>Metacritic Rating: {index.metacritic ? index.metacritic : "unrated"}</CardSubtitle>
+                    <CardSubtitle className="headingsSorta">Metacritic Rating: </CardSubtitle>
+                    <CardSubtitle><strong>{index[1].metacritic ? index[1].metacritic : "unrated"}</strong></CardSubtitle>
                     <br />
-                    {(index.stores.length > 0) ? index.stores.map((store, key) => <span>{store.store.name}</span>) : <CardSubtitle>No stores Listed</CardSubtitle>}
-                    {index.tba ? <CardSubtitle>"Release Date not announced"</CardSubtitle> : <CardSubtitle>Release Date: {index.released}</CardSubtitle>}
-                    <CardSubtitle>Rating: {index.rating}<Button onClick={()=>this.setState({newModalOpen: true})}>Update</Button></CardSubtitle>
-                    <CardSubtitle>Why I'm Interested: {index.comments}<DeleteComment listFetch={this.props.listFetch} sessionToken={this.props.sessionToken} removeValueKey={this.state.removeValueKey} /></CardSubtitle>
-                    <a href={"https://rawg.io/" + index.slug}>RAWG page</a>
-                    <Button value={key} onClick={() => this.setState({removeValueKey: key})} ><DeleteList sessionToken={this.props.sessionToken} listFetch={this.props.listFetch} removeValueKey={this.state.removeValueKey}/></Button>
+                    <CardSubtitle className="headingsSorta">Release Date: </CardSubtitle>
+                    <CardSubtitle><strong>{index[1].releaseDate.slice(0, 10)}</strong></CardSubtitle>
+                    <br />
+                    <CardSubtitle className="headingsSorta">My Rating: <strong>{index[1].rating}/5</strong> <Button className="button" value={key} onClick={(event)=>this.setState({newModalOpen: true, removeValueKey: event.target.value})}>Update My Rating</Button></CardSubtitle>
+                    {/* <CardSubtitle className="headingsSorta">My Rating: <strong>{index[1].rating}/5</strong><Button className="button" onClick={()=>this.setRemoveValueKey(myCards[key].id, true)}>Update My Rating</Button></CardSubtitle> */}
+                    <br />
+                    <CardSubtitle className="headingsSorta">Why I'm Interested: </CardSubtitle>
+                    <CardSubtitle><strong>{(index[1].comments.length > 0) ? index[1].comments[0].comment : null}</strong></CardSubtitle>
+                    <DeleteComment id={index[1].id} setListFetch={this.props.setListFetch} getFromDB={this.props.getFromDB} listFetch={this.props.listFetch} sessionToken={this.props.sessionToken} removeValueKey={this.state.removeValueKey} setRemoveValueKey={this.setRemoveValueKey} />
+                    <p></p>
+                    <a href={"https://rawg.io/" + index[1].slug} className="rawgLink">RAWG page</a>
+                    <p></p>
+                    <Button className="button" value={key} onClick={(event) => this.setRemoveValueKey(event.target.value )} ><DeleteList id={index[1].id} setListFetch={this.props.setListFetch} getFromDB={this.props.getFromDB} sessionToken={this.props.sessionToken} listFetch={this.props.listFetch} removeValueKey={this.state.removeValueKey} setRemoveValueKey={this.setRemoveValueKey} /></Button>
+                    {/* <Button className="button" onClick={() => this.setRemoveValueKey(myCards[key].id)} ><DeleteList setListFetch={this.props.setListFetch} getFromDB={this.props.getFromDB} sessionToken={this.props.sessionToken} listFetch={this.props.listFetch} removeValueKey={this.state.removeValueKey} setRemoveValueKey={this.setRemoveValueKey} /></Button> */}
                 </CardBody>
         </Card>
         ));
@@ -62,11 +86,12 @@ class ListRender extends React.Component {
         }
     }
 
+
     render() {
         return(
             <div id="listWrapper">
             {this.toggleRun()}
-            {this.state.newModalOpen ? <UpdateList newModalOpen={this.state.newModalOpen} modalToggle={this.modalToggle} listFetch={this.props.listFetch} removeValueKey={this.state.removeValueKey} sessionToken={this.props.sessionToken} /> : null}
+            {this.state.newModalOpen ? <UpdateList newModalOpen={this.state.newModalOpen} setListFetch={this.props.setListFetch} getFromDB={this.props.getFromDB} modalToggle={this.modalToggle} listFetch={this.props.listFetch} removeValueKey={this.state.removeValueKey} setRemoveValueKey={this.setRemoveValueKey} sessionToken={this.props.sessionToken} /> : null}
             </div>
         )
 }

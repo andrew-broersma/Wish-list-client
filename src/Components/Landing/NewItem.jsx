@@ -8,7 +8,8 @@ class NewItem extends React.Component {
         super(props)
         this.state = {
             rating: 0,
-            comment: ""
+            comment: "",
+            listResponse: [],
         }
     }
 
@@ -22,13 +23,17 @@ class NewItem extends React.Component {
         return(userId)
     }}
 
-    postComment(props, event) {
-        const id = this.parseJwt(localStorage.token).id
+    setListResponse = (data) => {
+        this.setState({listResponse: data})
+    }
+
+    postComment(listId) {
+        // const id = this.parseJwt(localStorage.token).id
 
         let reqBody = {
             comment: this.state.comment,
             gameId: this.props.genericFetch.results[this.props.cardValueKey].id,
-            listId: id
+            listId
         }
 
         fetch(`http://localhost:3050/userComment/addComment`, {
@@ -70,13 +75,14 @@ class NewItem extends React.Component {
             })
         })
             .then((res) => res.json())
-            .then((data) => console.log(data))
+            // .then((data) => this.setListResponse(data))
+            .then((data) => {this.postComment(data.id)})
             .then(console.log(reqBody))
     }
 
     superSpecialMethod = (event) => {
         event.preventDefault()
-        this.postComment(event);
+        // this.postComment(event);
         console.log(this.state.rating)
         console.log(this.state.comment)
         this.postList(event);

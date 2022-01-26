@@ -1,0 +1,27 @@
+#listWrapper {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: slateblue;
+    font-size: .75em;
+}
+
+.cardTitle {
+    color:aquamarine;
+    font-size: 1em;
+}
+
+.rawgLink {
+    color: navajowhite;
+}
+
+.button {
+    padding: 0;
+    font-size: .75em;
+}
+.headingsSorta {
+    color: yellowgreen
+}

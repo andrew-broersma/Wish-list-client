@@ -30,12 +30,19 @@ class MappingFun extends React.Component {
                     <CardTitle><strong>{index.name}</strong></CardTitle>
                     <p></p>
                     <br />
+                    <CardSubtitle><strong>Genre:</strong></CardSubtitle>
                     {(index.genres.length > 0) ? index.genres.map((genre, key) => <span className='genre'>{genre.name} </span>) : <CardSubtitle>No Genre Listed</CardSubtitle>}
-                    <CardSubtitle>Metacritic Rating: {index.metacritic ? index.metacritic : "unrated"}</CardSubtitle>
                     <br />
+                    <CardSubtitle><strong>Metacritic Rating:</strong></CardSubtitle>
+                    <CardSubtitle>{index.metacritic ? index.metacritic : "unrated"}</CardSubtitle>
+                    <br />
+                    <CardSubtitle><strong>Stores:</strong></CardSubtitle>
                     {(index.stores.length > 0) ? index.stores.map((store, key) => <span>{store.store.name}</span>) : <CardSubtitle>No stores Listed</CardSubtitle>}
-                    {index.tba ? <CardSubtitle>"Release Date not announced"</CardSubtitle> : <CardSubtitle>Release Date: {index.released}</CardSubtitle>}
-                    <a href={"https://rawg.io/" + index.slug}>RAWG page</a>
+                    <p></p>
+                    {index.tba ? <CardSubtitle>"Release Date not announced"</CardSubtitle> : <CardSubtitle><strong>Release Date:</strong><br/> {index.released}</CardSubtitle>}
+                    <p></p>
+                    <a style={{color:"navajowhite"}} href={"https://rawg.io/" + index.slug}>RAWG page</a>
+                    <p></p>
                     <Button value={key} onClick={() => this.setState({cardValueKey: key, isModalOpen: true})}>Add to Wishlist</Button>
                 </CardBody>
         </Card>

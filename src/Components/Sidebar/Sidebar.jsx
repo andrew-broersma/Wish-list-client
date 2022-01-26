@@ -39,38 +39,13 @@ class Sidebar extends React.Component {
 
     render() {
         return(
-            <div>
+            <div id="sidebar">
                 <ul>           
+                    {/* <li id="myList" ><a href="../MyList/MyList">My List</a></li>
+                    <li id="browse">Back to Browse</li> */}
                     <li id="myList" ><Link to="/myList">My List</Link></li>
-                    <li id="browse"><Link to="/mappedGames">Back to Browse</Link></li>
-                    {/* <li id="myList" ><Link to="/">My List</Link></li>
-                    <li><Link to="/mappingFun">Back to Browse</Link></li> */}
-                    <Form>
-                        <FormGroup>
-                            <Label for="filterPlat">Filter by Platform</Label>
-                            <Input id="fitlerPlat" name="PlatformSelect" type="select">
-                                <option>PC</option>
-                                <option>PS5</option>
-                                <option>Xbox X</option>
-                                <option>Switch</option>
-                                <option>PS4</option>
-                                <option>Xbox One</option>
-                            </Input>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="filterGen">Filter by Genre</Label>
-                            <Input id="filterGen" name="GenreSelect" type="select">
-                                <option>RPG</option>
-                                <option>Racing</option>
-                                <option>Simulation</option>
-                                <option>Indie</option>
-                                <option>Adventure</option>
-                                <option>Strategy</option>
-                                <option>Single Player</option>
-                            </Input>
-                        </FormGroup>
-                    </Form>
-                    <li id="logout" ><button onClick={this.props.clearLocalStorage} >Logout</button></li>
+                    <li><Link to="/browseGames">Back to Browse</Link></li>
+                    <li id="logout" ><button onClick={this.props.clearLocalStorage} ><Link to="/">Logout</Link></button></li>
                 </ul>
                 <div>
                     {/* <Switch>

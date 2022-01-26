@@ -1,6 +1,7 @@
 import React from "react";
+import { Route, Switch, Link } from "react-router-dom";
 import './auth.css';
-import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+import Landing from "../Landing/Landing";
 
 
 class Auth extends React.Component {
@@ -126,7 +127,7 @@ class Auth extends React.Component {
                     <br/>
                 </form>
                 <button onClick={() => this.setIsRegister()}>Register</button>
-                <Link to="/browseGames" ><button onClick={(event) => this.handleSubmit(event)} >Submit</button></Link>
+                <button onClick={(event) => this.handleSubmit(event)} ><Link to="/browseGames">Submit</Link></button>
             </div>
         )
     }

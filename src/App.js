@@ -5,6 +5,9 @@ import Auth from './Components/Auth/Auth';
 import Landing from './Components/Landing/Landing';
 import MyList from './Components/MyList/MyList';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import CentralHub from './Components/CentralHub/CentralHub';
+import Sidebar from './Components/Sidebar/Sidebar';
+import Footer from './Components/Footer/Footer';
 
 class App extends React.Component {
   constructor(){
@@ -29,13 +32,6 @@ class App extends React.Component {
     this.setState({sessionToken: null})
   }
 
-  loginChecker() {
-    return (localStorage.getItem("token") !== null ? 
-    <Router><Landing sessionToken={this.state.sessionToken} clearLocalStorage={this.clearLocalStorage}/></Router> : 
-    <Auth updateLocalStorage={this.updateLocalStorage} />
-    )
-  }
-
   componentDidMount() {
     if (localStorage.getItem("token") !== null) {
       this.setState({sessionToken: localStorage.getItem("token")})
@@ -46,13 +42,13 @@ class App extends React.Component {
   render() {
     return (
     <div className="App">
-      {/* {this.loginChecker()} */}
-      <Router>
-        <Switch>
-          <Route><Auth exact path="/" updateLocalStorage={this.updateLocalStorage} /></Route> :
-          <Route><Landing path="/browseGames" sessionToken={this.state.sessionToken} clearLocalStorage={this.clearLocalStorage}/></Route>
-        </Switch>
-      </Router>
+      {this.state.sessionToken ? <Sidebar clearLocalStorage={this.clearLocalStorage}/> : null}
+      <Switch>
+          <Route exact path="/"><Auth updateLocalStorage={this.updateLocalStorage} /></Route>
+          <Route exact path="/browseGames"><Landing sessionToken={this.state.sessionToken} clearLocalStorage={this.clearLocalStorage}/></Route>
+          <Route exact path="/myList"><MyList sessionToken={this.state.sessionToken} /></Route>
+        </Switch>      
+        <Footer />
     </div>
   )};
 }
