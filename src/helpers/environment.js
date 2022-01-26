@@ -6,7 +6,7 @@ switch (window.location.hostname) {
         break;
     
     case 'ab-game-wish-list-client.herokuapp.com':
-        APIURL = 'https://ab-game-wish-list-client.herokuapp.com'
+        APIURL = 'https://ab-game-wish-list.herokuapp.com'
 }
 
 export default APIURL
