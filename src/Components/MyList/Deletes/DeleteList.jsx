@@ -2,7 +2,6 @@ import React from 'react';
 import './DeleteList.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'reactstrap'
-import { Link } from 'react-router-dom'
 import APIURL from '../../../helpers/environment';
 
 class DeleteList extends React.Component {

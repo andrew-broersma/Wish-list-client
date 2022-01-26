@@ -1,9 +1,6 @@
 import React from 'react';
 import './landing.css';
-import { Switch, Route } from 'react-router-dom'
 import MappingFun from './MappingFun';
-import Sidebar from '../Sidebar/Sidebar';
-import MyList from '../MyList/MyList';
 
 class Landing extends React.Component {
     constructor(props) {

@@ -29,8 +29,6 @@ class UpdateComment extends React.Component{
             })
         })
         .then((res) => res.json())
-        .then((data) => console.log(data))
-        .then(console.log(reqBody))
     }
 
     modalToggle = (event) => {

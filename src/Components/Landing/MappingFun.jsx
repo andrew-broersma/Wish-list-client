@@ -1,7 +1,7 @@
 import React from 'react';
 import './MappingFun.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { CardImg, Card, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap';
+import { CardImg, Card, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
 import NewItem from './NewItem';
 
 class MappingFun extends React.Component {
@@ -19,7 +19,6 @@ class MappingFun extends React.Component {
     }
 
     browsingGames(data) {
-        console.log(data);
 
         return(
 

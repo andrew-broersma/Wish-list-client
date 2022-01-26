@@ -4,8 +4,7 @@ import './App.css';
 import Auth from './Components/Auth/Auth';
 import Landing from './Components/Landing/Landing';
 import MyList from './Components/MyList/MyList';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
-import CentralHub from './Components/CentralHub/CentralHub';
+import { Route, Switch } from "react-router-dom"
 import Sidebar from './Components/Sidebar/Sidebar';
 import Footer from './Components/Footer/Footer';
 

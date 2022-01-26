@@ -1,7 +1,8 @@
 import React from "react";
 import './NewItem.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Form, FormGroup, Input } from 'reactstrap'
+import { Modal, ModalHeader, ModalBody, Form, FormGroup, Input } from 'reactstrap'
+import APIURL from "../../helpers/environment";
 
 class NewItem extends React.Component {
     constructor(props) {
@@ -36,7 +37,7 @@ class NewItem extends React.Component {
             listId
         }
 
-        fetch(`http://localhost:3050/userComment/addComment`, {
+        fetch(`${APIURL}/userComment/addComment`, {
             method: "POST",
             body: JSON.stringify(reqBody),
             headers: new Headers({
@@ -45,13 +46,9 @@ class NewItem extends React.Component {
             })
         })
         .then((res) => res.json())
-        .then((data) => console.log(data))
-        .then(console.log(reqBody))
     }
 
     postList(props, event) {
-        console.log(this.state)
-        console.log(process.env.APIURL)
         let reqBody = {
             gameName: this.props.genericFetch.results[this.props.cardValueKey].name,
             releaseDate: this.props.genericFetch.results[this.props.cardValueKey].released,
@@ -66,7 +63,7 @@ class NewItem extends React.Component {
             rating: this.state.rating,
         }
 
-        fetch(`http://localhost:3050/list/updateList`, {
+        fetch(`${APIURL}/list/updateList`, {
             method: "POST",
             body: JSON.stringify(reqBody),
             headers: new Headers({
@@ -77,14 +74,11 @@ class NewItem extends React.Component {
             .then((res) => res.json())
             // .then((data) => this.setListResponse(data))
             .then((data) => {this.postComment(data.id)})
-            .then(console.log(reqBody))
     }
 
     superSpecialMethod = (event) => {
         event.preventDefault()
         // this.postComment(event);
-        console.log(this.state.rating)
-        console.log(this.state.comment)
         this.postList(event);
         this.props.modalToggle(event);
     }
